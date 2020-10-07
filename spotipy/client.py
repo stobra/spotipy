@@ -326,7 +326,6 @@ class Spotify(object):
             Parameters:
                 - track_id - a spotify URI, URL or ID
         """
-
         trid = self._get_id("track", track_id)
         return self._get("tracks/" + trid)
 
@@ -337,10 +336,18 @@ class Spotify(object):
                 - tracks - a list of spotify URIs, URLs or IDs. Maximum: 50 IDs.
                 - market - an ISO 3166-1 alpha-2 country code.
         """
-
         tlist = [self._get_id("track", t) for t in tracks]
         return self._get("tracks/?ids=" + ",".join(tlist), market=market)
 
+    def track_analysis(self, track_id):
+        """ returns tracks audio analysis for a given track's ID, URI or URL
+
+            Parameters:
+                - track_id - a spotify URI, URL or ID
+        """
+        trid = self._get_id("track", track_id)
+        return self._get("audio-analysis/" + trid)
+    
     def artist(self, artist_id):
         """ returns a single artist given the artist's ID, URI or URL
 
